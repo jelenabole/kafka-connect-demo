@@ -1,0 +1,19 @@
+{
+  "name": "SftpCsvSourceConnector",
+  "config": {
+    "connector.class": "io.confluent.connect.sftp.SftpCsvSourceConnector",
+    "tasks.max": "1",
+    "sftp.host": "sftp-server",
+    "sftp.port": "22",
+    "sftp.username": "user",
+    "sftp.password": "pass",
+    "kafka.topic": "demo-topic",
+    "input.path": "sftp",
+    "finished.path": "sftp/archived",
+    "error.path": "sftp/error",
+    "cleanup.policy": "MOVE",
+    "input.file.pattern": ".*\\.csv",
+    "behavior.on.error": "IGNORE",
+    "schema.generation.enabled": true
+  }
+}
