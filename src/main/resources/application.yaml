@@ -1,0 +1,5 @@
+---
+# NOTE: make changes in './application-default.yaml'
+spring:
+  application:
+    name: spring-demo

@@ -1,0 +1,81 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/spring_demo
+    username: spring_demo
+    password: spring_demo
+  flyway:
+    locations: classpath:/db/migrations
+  jpa:
+    open-in-view: false
+    show-sql: true
+  task:
+    scheduling:
+      pool:
+        size: 10
+      thread-name-prefix: "Scheduler::"
+  kafka:
+    bootstrap-servers: "localhost:9092"
+    security:
+      protocol: "PLAINTEXT"
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    consumer:
+      group-id: "spring-demo"
+      key-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
+      auto-offset-reset: latest
+      properties:
+        spring.json.trusted.packages: "com.ingemark.springdemo.messaging.*"
+        spring.deserializer.key.delegate.class: org.apache.kafka.common.serialization.StringDeserializer
+        spring.deserializer.value.delegate.class: org.springframework.kafka.support.serializer.JsonDeserializer
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: loggers
+      base-path: /manage
+  endpoint:
+    logfile:
+      enabled: true
+
+springdoc:
+  swagger-ui:
+    display-operation-id: true
+
+logging:
+  pattern:
+    level: "%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]"
+
+com:
+  ingemark:
+    spring-demo:
+      scheduler:
+        default-max-lock: "10m"
+        refresh-degrees:
+          enabled: true
+          fixed-rate-ms: 60000
+          initial-delay-ms: 10000
+          max-lock: "5m"
+        degree-count:
+          enabled: true
+          cron: "0 0 0 1 * *"
+          max-lock: "5m"
+        outbox:
+          enabled: true
+          fixed-rate-ms: 3000
+          initial-delay-ms: 1000
+          batch-size: 100
+      client:
+        degree-count-reporter:
+          retry-max-attempts: 3
+          retry-backoff: 1000
+          base-url: http://localhost:8080/degree-count-web-service
+          count-endpoint: /degree-count
+      kafka:
+        max-retries: 5
+        retry-interval-ms: 1000
+        topic-student: "student"
+        topic-instructor: "instructor"
+        dead-letter-topic: "dead-letter-topic"

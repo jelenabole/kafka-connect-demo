@@ -1,0 +1,2 @@
+ALTER TABLE student_course
+    ADD COLUMN passed BOOLEAN NOT NULL DEFAULT FALSE;

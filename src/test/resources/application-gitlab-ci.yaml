@@ -1,0 +1,7 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://postgres/spring_demo_test
+  jpa:
+    show-sql: false
+  kafka:
+    bootstrap-servers: "broker:9092"
