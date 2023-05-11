@@ -10,7 +10,7 @@ if [ ! -f /tmp/start-flag.txt ]; then
   /usr/bin/kafka-topics --create --topic demo-topic --partitions 1 --replication-factor 1 --if-not-exists --zookeeper "$ZOOKEEPER_HOSTS"
 
   # start connectors - example
-#  /usr/bin/connect-standalone /connectors/connect-standalone-sftp.properties /connectors/connect-sftp-csv.properties
+#  /usr/bin/connect-standalone /connectors/connect-standalone.properties /connectors/connect-sftp-csv.properties
 #  /etc/kafka/connect-standalone.properties
 
   touch /tmp/start-flag.txt
