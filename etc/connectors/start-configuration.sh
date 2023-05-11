@@ -11,11 +11,12 @@ if [ ! -f /tmp/start-flag.txt ]; then
 
   # start connectors - example
 #  /usr/bin/connect-standalone /connectors/connect-standalone-sftp.properties /connectors/connect-sftp-csv.properties
+#  /etc/kafka/connect-standalone.properties
 
-  touch /tmp/start-flag.txt;
+  touch /tmp/start-flag.txt
 fi
 
 # Start worker
-echo "Launching Kafka Connect worker"
+echo "Launching Kafka Connect worker ..."
 /etc/confluent/docker/run
 sleep infinity
