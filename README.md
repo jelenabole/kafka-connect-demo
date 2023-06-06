@@ -12,7 +12,7 @@ To successfully run the application, ensure that the following prerequisites are
 * Proper configuration of Kafka connectors (with DB connection details and SFTP server credentials)
 
 
-# Start project
+# Starting the project
 1. Create folders "archived" and "error" inside the "sftp" folder
 2. Configure the application by providing necessary connection details, file paths, and database configurations 
 3. Run docker-compose
