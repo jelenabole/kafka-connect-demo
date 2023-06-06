@@ -5,7 +5,7 @@ if [ ! -f /tmp/start-flag.txt ]; then
   confluent-hub install --no-prompt confluentinc/kafka-connect-jdbc:10.7.1
   echo "Connectors installed ..."
 
-  # create topics (change names)
+  # create topics
   echo "Creating topics ..."
   /usr/bin/kafka-topics --create --topic demo-topic --partitions 1 --replication-factor 1 --if-not-exists --zookeeper "$ZOOKEEPER_HOSTS"
 
