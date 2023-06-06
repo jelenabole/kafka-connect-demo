@@ -1,8 +1,10 @@
 {
-  "name": "SftpCsvSourceConnector",
+  "name": "SftpJsonSourceConnector",
   "config": {
-    "connector.class": "io.confluent.connect.sftp.SftpCsvSourceConnector",
+    "connector.class": "io.confluent.connect.sftp.SftpJsonSourceConnector",
     "tasks.max": "1",
+    "key.converter": "org.apache.kafka.connect.storage.StringConverter",
+    "value.converter": "org.apache.kafka.connect.json.JsonConverter",
     "sftp.host": "sftp-server",
     "sftp.port": "22",
     "sftp.username": "user",
@@ -12,8 +14,8 @@
     "finished.path": "sftp/archived",
     "error.path": "sftp/error",
     "cleanup.policy": "MOVE",
-    "input.file.pattern": ".*\\.csv",
+    "input.file.pattern": ".*\\.json",
     "behavior.on.error": "IGNORE",
-    "schema.generation.enabled": true
+    "schema.generation.enabled": "true"
   }
 }
